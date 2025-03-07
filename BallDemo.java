@@ -1,11 +1,15 @@
 import java.awt.Color;
-
+import java.util.ArrayList;
 /**
  * Class BallDemo - a short demonstration showing animation with the 
  * Canvas class. 
  *
- * @author Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * Added a new method called boxBounce that simulates a user-defined amount
+ * of balls bouncing at random positions and speeds within a drawn box on the
+ * canvas. All balls drawn have a random color.
+ * 
+ * @author Nolan Canto
+ * @version 2025.03.07
  */
 
 public class BallDemo   
@@ -50,5 +54,49 @@ public class BallDemo
                 finished = true;
             }
         }
+    }
+    /**
+     * Simulates a user-defined amount of balls bouncing 
+     * within a drawn box at random positions and speeds.
+     * 
+     * @param numBalls The number of balls to be drawn
+     */
+    public void boxBounce(int numBalls) {
+        myCanvas.setVisible(true);
+        
+        int top = 50;
+        int bottom = 450;
+        int left = 50;
+        int right = 550;
+        boolean finished = false;
+        
+        myCanvas.setForegroundColor(Color.BLACK);
+        myCanvas.drawLine(left, top, right, top);   
+        myCanvas.drawLine(left, bottom, right, bottom); 
+        myCanvas.drawLine(left, top, left, bottom);  
+        myCanvas.drawLine(right, top, right, bottom); 
+        
+        ArrayList<BoxBall> balls = new ArrayList<>();
+        for (int i = 0; i < numBalls; i++) {
+            BoxBall ball = new BoxBall(top, bottom, right, left, myCanvas);
+            ball.draw();
+            balls.add(ball);
+        }
+        
+        
+        while (!finished) {
+            myCanvas.wait(50);
+            
+            myCanvas.setForegroundColor(Color.BLACK);
+            myCanvas.drawLine(left, top, right, top);   
+            myCanvas.drawLine(left, bottom, right, bottom); 
+            myCanvas.drawLine(left, top, left, bottom);  
+            myCanvas.drawLine(right, top, right, bottom);
+            
+            for (BoxBall ball : balls) {
+                ball.move();
+            }
+        }
+        
     }
 }
