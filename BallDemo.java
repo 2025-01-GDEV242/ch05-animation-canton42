@@ -8,6 +8,9 @@ import java.util.ArrayList;
  * of balls bouncing at random positions and speeds within a drawn box on the
  * canvas. All balls drawn have a random color.
  * 
+ * No Limits Branch: This branch modifies boxBounce to remove the 5 minimum and
+ * 30 maximum limit of numBalls.
+ * 
  * @author Nolan Canto
  * @version 2025.03.07
  */
@@ -59,9 +62,6 @@ public class BallDemo
      * Simulates a user-defined amount of balls bouncing 
      * within a drawn box at random positions and speeds.
      * 
-     * NOTE: The minimum number of balls that can be on screen is 5, 
-     * the maximum amount is 30.
-     * 
      * @param numBalls The number of balls to be drawn
      */
     public void boxBounce(int numBalls) {
@@ -78,13 +78,6 @@ public class BallDemo
         myCanvas.drawLine(left, bottom, right, bottom); 
         myCanvas.drawLine(left, top, left, bottom);  
         myCanvas.drawLine(right, top, right, bottom); 
-        
-        //This hard limits the minimum and maximum amount of balls on screen
-        //to be 5 and 30 respectively, no matter if a higher/lower amount is
-        //entered for numBalls. I had too much fun spawning thousands of balls,
-        //so there's a seperate branch to the project with this line removed.
-        numBalls = Math.max(5, Math.min(numBalls, 30));
-        
         
         ArrayList<BoxBall> balls = new ArrayList<>();
         for (int i = 0; i < numBalls; i++) {
